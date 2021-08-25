@@ -1,0 +1,43 @@
+<!--pages/home/home.wxml-->
+
+<view style="position:fixed;left:0;top:0;width:100%;z-index:9">
+	<!-- 搜索 -->
+	<view class='page_row' bindtap="suo">
+		<view class="search">
+			<view class="df search_arr">
+				<icon class="searchicon" size="18" type='search'></icon>
+				<input class="" disabled placeholder="Search" value="{{searchValue}}" />
+			</view>
+		</view>
+	</view>
+
+	<!-- 横向滚动nav -->
+	<scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
+		<block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
+			<view class="nav-item {{currentTab == idx ?'active':''}}" data-name="{{navItem.cat_name}}" data-current="{{idx}}"
+				bindtap="switchNav">{{navItem.cat_name}}</view>
+		</block>
+	</scroll-view>
+
+</view>
+
+<!-- 占位 -->
+<view style="width:100%;height:168rpx"></view>
+<!-- cantainer文章列表 -->
+<view class="cantainer">
+	<scroll-view scroll-y="true" style="height:{{windowHeight*2-220}}rpx;width:100%" bindtouchstart='touchStart'
+		bindtouchend='touchEnd' bindtouchmove='touchMove'>
+		<!-- 下拉 -->
+		<view wx:if="{{showRefresh}}" style='width:100%;position:relative;padding:60rpx 0;'>
+			<view class="text-gray" style='position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);'>
+				<view wx:if="{{freshStatus == 'fresh'}}" class="flex">
+					<view class="lzy-loading"></view>
+				</view>
+			</view>
+		</view>
+		<!-- 文章推荐列表 -->
+		<articlelist id='waterFallView'></articlelist>
+	</scroll-view>
+
+
+</view>

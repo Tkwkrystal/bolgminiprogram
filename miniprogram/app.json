@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/mypage/mypage",
+    "pages/publishBlog/publishBlog",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/openapi/openapi",
+    "pages/openapi/serverapi/serverapi",
+    "pages/openapi/callback/callback",
+    "pages/openapi/cloudid/cloudid",
+    "pages/im/im",
+    "pages/im/room/room",
+    "pages/search/search",
+    "pages/blogDetail/blogDetail",
+    "pages/otherpage/otherpage"
+  ],
+  "window": {
+    "navigationBarTitleText": "小糖书",
+    "navigationBarTextStyle":"black",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundTextStyle":"light"
+  },
+  "tabBar": {
+    "color": "#B0B0B0",
+    "selectedColor": "#000000",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+        {
+            "pagePath": "pages/home/home",
+            "text": "首页",
+            "iconPath": "pages/image/home.png",
+            "selectedIconPath": "pages/image/home-selected.png"
+        },
+        {
+            "pagePath": "pages/mypage/mypage",
+            "text": "我的",
+            "iconPath": "pages/image/my.png",
+            "selectedIconPath": "pages/image/my-selected.png"
+        }
+      ]
+  },
+  "usingComponents":{
+    "articlelist":"/components/articlelist/articlelist",
+    "imageswiper":"/components/imageswiper/imageswiper"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

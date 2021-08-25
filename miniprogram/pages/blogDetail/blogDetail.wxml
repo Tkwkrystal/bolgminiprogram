@@ -1,0 +1,92 @@
+<!--pages/houseDetail/houseDetail.wxml-->
+
+<!-- 轮播图 -->
+<view class="swiper">
+    <swiper easing-function="easeInOutCubic" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#f72727" style='height:{{Height}}'>
+        <block wx:for="{{detail.photoInfo}}" wx:key="*this">
+            <swiper-item>
+                <view class="imgview">
+                <image src="{{item}}" mode="widthFix" bindload='imgHeight'></image>
+                </view>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
+
+<!-- 用户信息 联系方式 -->
+<view class="houseAgent-box font-size-14">
+    <view class="houseAgent-box-portrait float-left" bindtap="gootheruser" data-followerid="{{detail.user[0].openid}}">
+     
+        <image  src="{{detail.user[0].avatarurl}}"></image>
+    </view>
+    <view class="Contact-box">
+        <view class="font-size-16" style="display:block;font-weight:500;">{{detail.user[0].nickname}}</view>
+        <view class="text-grey">{{detail.user[0].mobile}}</view>
+    </view>
+
+    <!-- 是否关注 -->
+    <view class="contact-box-right float-right" >
+        <view bindtap="Docollection" data-userid="{{user_id}}" data-followerid="{{detail.open_id}}" data-index="{{index}}">
+        <!-- <image style="width: 50rpx;height: 40rpx;margin-right:5px;vertical-align:middle" mode="scaleToFill" src="{{detail.like_status=='1'?'../../pages/image/common/like.png':'../../pages/image/common/nolike.png'}}"></image> -->
+        <view class="focus" style="color:rgba(224, 32, 32, 1);border: 1px solid #E02020;" wx:if='{{!HasCollection}}'>关注</view>
+        <view wx:else class="focus" style="color:rgba(0, 0, 0, 0.5);border: 1px solid rgba(0, 0, 0, 0.5);">已关注</view>
+        </view>
+        <!-- 编辑已发布的文章 -->
+        <view wx:if="{{detail.open_id == user_id}}"  class="focus" style="color:rgba(224, 32, 32, 1);border: 1px solid #E02020;margin-left:6px" bindtap="goedit">编辑</view>
+        <!-- 删除自己的文章 -->
+        <image  src="../image/common/delete.png" class="delete-icon" wx:if="{{detail.open_id == user_id}}" data-id="{{detail._id}}" bindtap="deleteacticle"></image>
+      </view>
+ 
+
+  
+
+
+</view>
+
+<!-- 所属标签 vue/node ... -->
+<view class="tag-container">
+    <view class="tags"  wx:for="{{detail.FormData.Tags}}" wx:key="*this">{{item}}</view>
+</view>
+
+<!-- 描述 -->
+<view class="headerBox">
+    <view class="headerBox-row-title font-size-16 title-text-font-weight">{{detail.FormData.title}}</view>
+  
+    <view class="headerBox-row font-size-14 text-grey">{{detail.FormData.introduction}}</view>
+</view>
+
+
+<!-- 占位 -->
+<view style="height:70px;"></view>
+
+
+<view class="footerBar">
+    <view class="footer-item2" bindtap="clickDianzan" data-user="{{detail.open_id}}" data-article="{{detail._id}}" data-author="{{detail.open_id}}">
+      
+                <image src="../image/icon/{{detail.like_status=='1'?'collection':'uncollection'}}.png"></image>
+          
+    </view>
+</view>
+
+<!-- /* 底部导航栏 */ -->
+<!-- <view class="footerBar">
+    <view class="footer-left float-left font-size-12">
+
+        <view class="footer-item" bindtap="Docollection">
+            <view>
+                <image src="../image/icon/{{HasCollection?'collection':'uncollection'}}.png"></image>
+            </view>
+            <view wx:if='{{!HasCollection}}'>收藏</view>
+            <view wx:else style="color:#F74C50">已收藏</view>
+        </view>
+
+        <view class="footer-item" style="width:70px;" bindtap="NavigateToCalculator">
+            <view>
+                <image src="../image/calculate.png"></image>
+            </view>
+            <view>房贷计算器</view>
+        </view>
+
+    </view>
+    <view class="footer-right float-right" data-phone="{{charge.phone}}" bindtap="Appointment">预约看房</view>
+</view> -->

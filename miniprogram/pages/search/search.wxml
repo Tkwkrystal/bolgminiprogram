@@ -1,0 +1,48 @@
+<!--pages/search/search.wxml-->
+<view class="search page_row">
+  <input class="df_1" placeholder="请输入你有搜索的内容" value="{{searchValue}}" bindinput="searchValueInput" />
+  <text class="search-text" bindtap="searchclick">搜索</text>
+</view>
+
+<!-- 搜索后 tabs切换 -->
+<view class="grid tabs" wx:if="{{result_show}}">
+  <view class="artice {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">文章</view>
+  <view class="user {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">用户</view>
+</view>
+
+
+<swiper wx:if="{{result_show}}" current="{{currentTab}}" class="swiper-box" duration="300"
+  style="margin-top: 10px;height:{{winHeight - 100}}px" bindchange="bindChange">
+  <swiper-item>
+    <!-- 文章推荐列表 -->
+    <articlelist id='waterFallView'></articlelist>
+  </swiper-item>
+  <swiper-item>
+    <!-- 404图片 -->
+<image style="width:100%" wx:if="{{!centent_Show}}" mode="scaleToFill" src="../image/common/nodata.png"></image>
+
+    <view class="flex-layout avatarinfo"  wx:for="{{followList}}" wx:key="index">
+      <view class="flex-layout" bindtap="gootheruser" data-followerid="{{item.openid}}" style="width: 100%;">
+        <image class="avatarimg" mode="scaleToFill" src="{{item.avatarurl}}"></image>
+        <text class="nickname font-size-12">{{item.nickname}}</text>
+        <image src="{{item.gender == 0 ? '../image/common/male.png' : '../image/common/female.png'}}"
+          style="width:12px;height:12px" alt=""></image>
+        <text class="nickname font-size-12">{{item.city}}</text>
+
+        <text class="likesum font-size-12">{{item.likessumarr.length}}获赞</text>
+        <!-- 是否关注 -->
+        <view class="contact-box-right float-right">
+          <view wx:if='{{item.followarr.length>0}}'  class="focuslist" style="color:rgba(0, 0, 0, 0.5);border: 1px solid rgba(0, 0, 0, 0.5);">已关注</view>
+          <view wx:else class="focuslist" style="color:rgba(224, 32, 32, 1);border: 1px solid #E02020;" >
+            关注</view>
+        </view>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>
+
+
+
+<!-- <view class="search_no" wx:if="{{!centent_Show}}">
+  <text>很抱歉,没有找到您要搜索的资料/(ㄒoㄒ)/~~</text>
+</view> -->

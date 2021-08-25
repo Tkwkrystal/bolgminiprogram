@@ -1,0 +1,98 @@
+<!--pages/otherpage/otherpage.wxml-->
+
+<!-- 我的 - 滑动置顶 -->
+<view wx:if="{{scrollTop>170}}" class="toptitle">
+	<image src="../image/common/back.png" style="width: 27px;height: 27px;position:absolute;left:30rpx;top:100rpx" alt="" bindtap="goback"></image>
+	<!-- <image src="../image/common/house.png" style="width:12px;height:12px" alt=""></image> -->
+	<text>{{userInfo.nickname}}</text>
+</view>
+<image wx:else src="../image/common/back.png" style="width: 27px;height: 27px;position:absolute;left:30rpx;top:100rpx" alt="" bindtap="goback"></image>
+<!-- 背景图 -->
+<view class="bg-box">
+	<!-- 未登录 -->
+	<view wx:if="{{!UserLogin}}" class="head-box" bindtap="NavigateToLogin">
+		<view class="userAvatar-box">
+			<open-data type="userAvatarUrl"></open-data>
+		</view>
+		<view class="userlogin">
+			<view>登录/注册 (点击登录)</view>
+			<view class="font-size-12" style="color:grey;">需要先完成注册登录才能使用哦！</view>
+		</view>
+	</view>
+
+	<!-- 已登录 --> 
+	<view wx:else  bindtap="ScanPage">
+		<view class="head-box">
+		<view class="userAvatar-box">
+			<open-data type="userAvatarUrl"></open-data>
+		</view>
+		<view class="userlogin">
+			<view class="font-size-18">{{userInfo.nickname}}</view>
+			<!-- <view class="font-size-12" style="color:#e0dddd;">tel： {{userInfo.mobile}}</view> -->
+			<view class="info">
+				<view class="info-white">
+					<image src="{{userInfo.gender == 0 ? '../image/common/male.png' : '../image/common/female.png'}}" style="width:12px;height:12px" alt=""></image>
+				</view>
+				<view class="info-white" style="font-size:12px;color:#ffffff">
+					{{userInfo.province}} {{userInfo.city}}
+				</view>
+			</view>
+
+		</view>
+		</view>
+
+		<view class="info-bottom">
+			<view class="tip">tel: {{userInfo.mobile}}</view>
+			<view>
+				<view class="care-item" style="margin:0">
+					<view class="care-num">{{myfans.follows}}</view>
+					<view>关注</view>
+				</view>
+				<view class="care-item">
+					<view class="care-num">{{myfans.fans}}</view>
+					<view>粉丝</view>
+				</view>
+				<view class="care-item">
+					<view class="care-num">{{myfans.likes}}</view>
+					<view>获赞</view>
+				</view>
+				 <!-- 是否关注 -->
+				 <view class="contact-box-right float-right" bindtap="Docollection" data-userid="{{loginUser.openid}}" data-followerid="{{userInfo.openid}}">
+        <view class="focus" style="background: #e84747;" wx:if='{{!HasCollection}}'>关注</view>
+        <view wx:else class="focus" style=" background: rgba(0, 0, 0, 0.4);">已关注</view>
+      </view>
+				<view style="clear:both"></view>
+			</view>
+		</view>
+	</view>
+
+</view>
+
+<!-- 搜索后 tabs切换 -->
+<view class="grid tabs" >
+  <view class="artice {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">文章</view>
+  <view class="user {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">关注</view>
+</view>
+
+
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{swiperheight}}px" bindchange="bindChange">
+    <swiper-item>
+       <!-- 文章推荐列表 -->
+       <articlelist id='waterFallView'></articlelist>
+    </swiper-item>
+    <swiper-item>
+			    <!-- 404图片 -->
+					<image style="width:100%" wx:if="{{!centent_Show}}" mode="scaleToFill" src="../image/common/nodata.png"></image>
+			<view id='userlist' class="flex-layout avatarinfo" wx:for="{{followList}}" wx:key="index">
+            <view class="flex-layout" style="width: 100%;" bindtap="gootheruser" data-followerid="{{item.followarr[0].openid}}">
+              <image class="avatarimg" mode="scaleToFill" src="{{item.followarr[0].avatarurl}}"></image>
+							<text class="nickname font-size-12">{{item.followarr[0].nickname}}</text>
+							<image src="{{item.followarr[0].gender == 0 ? '../image/common/male.png' : '../image/common/female.png'}}" style="width:12px;height:12px" alt=""></image>
+							<text class="nickname font-size-12">{{item.followarr[0].city}}</text>
+							<text class="likesum font-size-12">{{item.likessumarr.length}}获赞</text>
+									<view class="focuslist" style="color:rgba(0, 0, 0, 0.5);border: 1px solid rgba(0, 0, 0, 0.5);">已关注</view>
+            </view>
+      </view>
+    </swiper-item>
+</swiper>
+

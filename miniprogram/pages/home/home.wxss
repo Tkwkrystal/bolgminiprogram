@@ -1,0 +1,135 @@
+/* pages/home/home.wxss */
+
+.header-box {
+    height: 70px;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    background-color: #fff;
+}
+
+.header-row {
+    height: 50%;
+    margin-top: 8px;
+    /* background-color: honeydew; */
+}
+
+.header-cell {
+    width: 25%;
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+    /* background-color: #b90fb1; */
+}
+
+.header-cell image {
+    width: 50px;
+    height: 50px;
+    /* background-color: #0f7bb9; */
+}
+
+.text-color {
+    color: #181818;
+}
+
+
+/* 搜索框 */
+.search{
+    width: 94%;
+    margin-left: 3%;
+   }
+   .search_arr {
+    border-radius: 10rpx;
+    background: rgba(118, 118, 128, 0.12);
+    color:rgba(60, 60, 67, 0.6);
+   }
+   .search_arr input{
+    margin-left: 60rpx;
+    height: 60rpx;
+    border-radius: 5px;
+   }
+   .bc_text {
+    line-height: 68rpx;
+    height: 68rpx;
+    margin-top: 34rpx;
+   }
+     
+   .sousuo {
+    margin-left: 15rpx;
+    width: 15%;
+    line-height: 150%;
+    text-align: center;
+    border: 1px solid #d0d0d0;
+    border-radius: 10rpx;
+   }
+   .page_row{
+    display: flex;
+    flex-direction: row;
+    background: white;
+    padding: 5rpx 0;
+   }
+   .searchicon {
+    margin: 12rpx;
+    position: absolute;
+    left: 23rpx;
+    z-index: 2;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+   }
+
+   /* nav */
+.nav {
+  height: 100rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 100rpx;
+  background: #f7f7f7;
+  font-size: 16px;
+  white-space: nowrap;
+  z-index: 99;
+  background-color: #fff;
+}
+.nav-item {
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+  color: #333;
+  overflow: hidden;
+}
+.nav-item.active{
+  color: #09bb07;
+}
+
+/* cantainer文章列表 */
+.cantainer{
+    width: 100%;
+    /* padding: 0 1%; */
+    background-color: #f7f7f7;
+}
+.article{
+    /* column-count: 2;
+    column-gap: 0; */
+}
+/* 下拉 */
+.lzy-loading{
+    margin-right: 20rpx;
+    float: left;
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    border: 1px solid #f0f0f0;
+    border-left: 1px solid #6190E8;
+    animation: load 2s linear infinite;
+    -webkit-animation: load 2s linear infinite;
+  }
+  @-webkit-keyframes load
+  {
+    from{-webkit-transform:rotate(0deg);}
+    to{-webkit-transform:rotate(360deg);}
+  }
+  @keyframes load
+  {
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+  }

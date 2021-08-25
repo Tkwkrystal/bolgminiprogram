@@ -1,0 +1,98 @@
+/* pages/search/search.wxss */
+.searchcion{
+ width: 24px;
+ height: 24px;
+ text-align: center;
+ margin-top: 5rpx
+}
+.search{
+ padding: 1.5% 3%;
+ background: #fff;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ box-shadow: 0px 2px 10px #888888;
+}
+.search input{
+ width: 83%;
+ border-radius: 5px;
+ background: #fff;
+ border: none;
+ font-size: 12px;
+ padding:1% 2.5%;
+ margin-right: 5px;
+ background: rgba(118, 118, 128, 0.12);
+ }
+ .search-text{
+   font-size: 30rpx;
+   color: rgba(0, 0, 0, 0.5);
+ }
+.search button{
+ line-height:30px;
+ text-align: center;
+ border: none;
+ font-size: 28rpx;
+ background: white
+}
+.tabs{
+  width: 100%;
+  margin-top: 40rpx;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.25);
+}
+.user{
+  margin-left: 9%;
+}
+
+.active {
+  position: relative;
+  color: rgba(0, 0, 0, 0.85);
+}
+.active::after {
+  content: '';
+  position: absolute;
+  bottom: -10rpx;
+  left: 10%;
+  width: 80%;
+  height: 5rpx;
+  background: rgba(223, 23, 23, 1);
+}
+
+
+/* article-item */
+.article-container{
+  padding: 5rpx;
+}
+swiper-item{
+  overflow: scroll;
+}
+
+ /* 关注人 */
+ .avatarimg{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+
+.avatarinfo{
+  margin-top: 5px;
+  padding: 10px;
+}
+.avatarinfo text{
+  color: rgba(0, 0, 0, 0.5);
+}
+
+
+.focuslist{
+  font-size: 12px;
+  border-radius: 16px;
+  vertical-align: middle;
+  padding: 3px 12px 3px 12px;
+}
+
+
+.contact-box-right {
+  width: 80px;
+  text-align: center;
+}

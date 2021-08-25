@@ -1,0 +1,8 @@
+<!--components/imageswiper/imageswiper.wxml-->
+<swiper class="swiperw" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+<block wx:for="{{imgUrls}}" wx:key='index'>
+<swiper-item class="swiperItem">
+<image src="{{item}}" class="slide-image" />
+</swiper-item>
+</block>
+</swiper>

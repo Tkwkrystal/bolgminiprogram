@@ -1,0 +1,65 @@
+<!--components/articlelist/articlelist.wxml-->
+
+     <!-- 404图片 -->
+     <image style="width:100%" wx:if="{{!centent_Show}}" mode="scaleToFill" src="../../pages/image/common/nodata.png"></image>
+<!-- 文章推荐列表 -->
+<view class='fall-container' >
+  <!-- 左边一列 -->
+  <view id="left" class='fall-left'>
+    <block wx:for="{{leftList}}" wx:key="index">
+      <!--瀑布流内容卡片-->
+      <view class="aritcle" style="margin-right:2.5px;margin-top:0" >
+        <!-- <imageswiper imgUrls="{{item.photoInfo}}"></imageswiper> -->
+        <image  class="coverimg" mode="widthFix" src="{{item.photoInfo[0]}}" bindtap="NavigateToDetail" data-detail="{{item}}"  data-id="{{item._id}}"></image>
+        <view class="article-bottom">
+          <view class="font-size-12">{{item.FormData.title}}</view>
+          <!-- <view>{{item.FormData.introduction}}</view> -->
+          <view class="flex-layout avatarinfo">
+            <view class="flex-layout">
+              <image class="avatarimg"  mode="scaleToFill" bindtap="gootheruser" data-followerid="{{item.user[0].openid}}" src="{{item.user[0].avatarurl}}"></image>
+              <text class="nickname">{{item.user[0].nickname}}</text>
+            </view>
+            <view class="flex-layout" bindtap="clickDianzan" data-user="{{item.open_id}}" data-article="{{item._id}}" data-author="{{item.open_id}}" data-index="{{index}}" data-leftorright="left">
+              <image style="width: 40rpx;height: 34rpx;margin-right:5px" mode="scaleToFill"
+                src="{{item.like_status=='1'?'../../pages/image/common/like.png':'../../pages/image/common/nolike.png'}}">
+              </image>
+              <text class="font-size-12">{{item.likesum}}</text>
+            </view>
+
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!--右边一列 -->
+  <view id="right" class='fall-right'>
+    <block wx:for="{{rightList}}" wx:key="index">
+      <!--瀑布流内容卡片-->
+      <view class="aritcle" style="margin-left:2.5px;margin-top:0" >
+        <!-- <imageswiper imgUrls="{{item.photoInfo}}"></imageswiper> -->
+        <image class="coverimg"  mode="widthFix" src="{{item.photoInfo[0]}}" bindtap="NavigateToDetail" data-detail="{{item}}"  data-id="{{item._id}}"></image>
+        <view class="article-bottom">
+          <view class="font-size-12">{{item.FormData.title}}</view>
+          <!-- <view>{{item.FormData.introduction}}</view> -->
+          <view class="flex-layout avatarinfo">
+            <view class="flex-layout">
+              <image class="avatarimg" mode="scaleToFill"  bindtap="gootheruser" data-followerid="{{item.user[0].openid}}" src="{{item.user[0].avatarurl}}"></image>
+              <text class="nickname">{{item.user[0].nickname}}</text>
+            </view>
+            <view class="flex-layout" bindtap="clickDianzan" data-user="{{item.open_id}}" data-article="{{item._id}}" data-index="{{index}}"  data-leftorright="right">
+              <image style="width: 40rpx;height: 34rpx;margin-right:5px" mode="scaleToFill"
+                src="{{item.like_status=='1'?'../../pages/image/common/like.png':'../../pages/image/common/nolike.png'}}">
+              </image>
+              <text class="font-size-12">{{item.likesum}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+
+
+
+  <!-- 结尾 -->
+  <view class="ending">- The End -</view>
