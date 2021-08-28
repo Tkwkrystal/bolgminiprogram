@@ -16,10 +16,10 @@
           <!-- <view>{{item.FormData.introduction}}</view> -->
           <view class="flex-layout avatarinfo">
             <view class="flex-layout">
-              <image class="avatarimg"  mode="scaleToFill" bindtap="gootheruser" data-followerid="{{item.user[0].openid}}" src="{{item.user[0].avatarurl}}"></image>
-              <text class="nickname">{{item.user[0].nickname}}</text>
+              <image class="avatarimg"  mode="scaleToFill" bindtap="gootheruser" data-followerid="{{item.user[0]._openid}}" src="{{item.user[0].avatarUrl}}"></image>
+              <text class="nickName">{{item.user[0].nickName}}</text>
             </view>
-            <view class="flex-layout" bindtap="clickDianzan" data-user="{{item.open_id}}" data-article="{{item._id}}" data-author="{{item.open_id}}" data-index="{{index}}" data-leftorright="left">
+            <view class="flex-layout" bindtap="clickDianzan"  data-article="{{item._id}}" data-author="{{item.open_id}}" data-index="{{index}}" data-leftorright="left">
               <image style="width: 40rpx;height: 34rpx;margin-right:5px" mode="scaleToFill"
                 src="{{item.like_status=='1'?'../../pages/image/common/like.png':'../../pages/image/common/nolike.png'}}">
               </image>
@@ -43,10 +43,10 @@
           <!-- <view>{{item.FormData.introduction}}</view> -->
           <view class="flex-layout avatarinfo">
             <view class="flex-layout">
-              <image class="avatarimg" mode="scaleToFill"  bindtap="gootheruser" data-followerid="{{item.user[0].openid}}" src="{{item.user[0].avatarurl}}"></image>
-              <text class="nickname">{{item.user[0].nickname}}</text>
+              <image class="avatarimg" mode="scaleToFill"  bindtap="gootheruser" data-followerid="{{item.user[0]._openid}}" src="{{item.user[0].avatarUrl}}"></image>
+              <text class="nickName">{{item.user[0].nickName}}</text>
             </view>
-            <view class="flex-layout" bindtap="clickDianzan" data-user="{{item.open_id}}" data-article="{{item._id}}" data-index="{{index}}"  data-leftorright="right">
+            <view class="flex-layout" bindtap="clickDianzan" data-author="{{item.open_id}}" data-article="{{item._id}}" data-index="{{index}}"  data-leftorright="right">
               <image style="width: 40rpx;height: 34rpx;margin-right:5px" mode="scaleToFill"
                 src="{{item.like_status=='1'?'../../pages/image/common/like.png':'../../pages/image/common/nolike.png'}}">
               </image>

@@ -1,5 +1,6 @@
 // pages/otherpage/otherpage.js
 var app = getApp()
+let otheropenid
 Page({
 
     /**
@@ -7,6 +8,7 @@ Page({
      */
     data: {
         centent_Show:true,
+        fanslist_Show:true,
         UserLogin: false,
         userInfo: null,
         Adminstator: false,
@@ -50,13 +52,14 @@ Page({
         });
 
         // 获取传过来的用户 openid
-        let openid = options.id
+        otheropenid = options.id
         // 查询该用户信息
         const db = wx.cloud.database()
         db.collection('user').where({
-            openid: openid
+            _openid: otheropenid
         }).get({
             success(res) {
+                console.log('otherinfo',res.data[0])
                 wx.hideLoading()
                 if (res.errMsg == "collection.get:ok") {
                     that.setData({
@@ -66,10 +69,10 @@ Page({
                     // 获取文章列表
                     that.getarticles()
                     // 获取 关注/粉丝/获赞 
-                    that.getuserfans(openid)
+                    that.getuserfans(otheropenid)
 
                     // 检查是否已关注用户 a-当前登陆用户 b-文章作者用户
-                    that.HasCollection(loginInfo.openid, openid)
+                    that.HasCollection(loginInfo.openid, otheropenid)
                 }
             },
             fail: err => {
@@ -194,6 +197,8 @@ Page({
             this.getarticles()
         } else if (e.detail.current == '1') {
             this.getmyfollow()
+        }else if(e.detail.current == '2'){
+            this.getmyfanlist()
         }
     },
     // 是否关注
@@ -255,7 +260,7 @@ Page({
             name: 'blogs',
             data: {
                 type: 'getmyfollow',
-                userid: that.data.userInfo.openid
+                userid: otheropenid
             },
             success: res => {
                 wx.hideLoading()
@@ -280,6 +285,38 @@ Page({
             },
         })
     },
+    // 查询粉丝列表
+ getmyfanlist(){
+    let that = this
+    wx.showLoading()
+
+   wx.cloud.callFunction({
+       name: 'blogs',
+       data: {
+           type: 'getmyfanlist',
+           userid: otheropenid
+       },
+       success: res => {
+           wx.hideLoading()
+           console.log(res)
+           that.setData({
+                fanslist_Show: res.result.list.length == 0?false:true,
+               fansList: res.result.list,
+               swiperheight: res.result.list.length>0?res.result.list.length * 55 + 20:240
+           })  
+       },
+       fail: err => {
+           wx.hideLoading()
+           console.log(err)
+           wx.showToast({
+               title: '查询关注人失败',
+               icon: 'success',
+               duration: 2000
+           })
+
+       },
+   })
+},
     // 给文章列表组件传参数
     fillData: function (isFull, goods) {
         let view = this.selectComponent('#waterFallView');
@@ -295,7 +332,7 @@ Page({
             name: 'articles',
             data: {
                 type: 'getmyarticles',
-                userid: that.data.userInfo.openid
+                userid: otheropenid
             },
             success: async res => {
                 wx.hideLoading()

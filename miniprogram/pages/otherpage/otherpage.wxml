@@ -4,7 +4,7 @@
 <view wx:if="{{scrollTop>170}}" class="toptitle">
 	<image src="../image/common/back.png" style="width: 27px;height: 27px;position:absolute;left:30rpx;top:100rpx" alt="" bindtap="goback"></image>
 	<!-- <image src="../image/common/house.png" style="width:12px;height:12px" alt=""></image> -->
-	<text>{{userInfo.nickname}}</text>
+	<text>{{userInfo.nickName}}</text>
 </view>
 <image wx:else src="../image/common/back.png" style="width: 27px;height: 27px;position:absolute;left:30rpx;top:100rpx" alt="" bindtap="goback"></image>
 <!-- 背景图 -->
@@ -23,15 +23,13 @@
 	<!-- 已登录 --> 
 	<view wx:else  bindtap="ScanPage">
 		<view class="head-box">
-		<view class="userAvatar-box">
-			<open-data type="userAvatarUrl"></open-data>
-		</view>
+			<image src="{{userInfo.avatarUrl}}" class="userAvatar-box" alt=""></image>
+
 		<view class="userlogin">
-			<view class="font-size-18">{{userInfo.nickname}}</view>
-			<!-- <view class="font-size-12" style="color:#e0dddd;">tel： {{userInfo.mobile}}</view> -->
+			<view class="font-size-18">{{userInfo.nickName}}</view>
 			<view class="info">
 				<view class="info-white">
-					<image src="{{userInfo.gender == 0 ? '../image/common/male.png' : '../image/common/female.png'}}" style="width:12px;height:12px" alt=""></image>
+					<image src="{{userInfo.gender == 1 ? '../image/common/male.png' : '../image/common/female.png'}}" style="width:12px;height:12px" alt=""></image>
 				</view>
 				<view class="info-white" style="font-size:12px;color:#ffffff">
 					{{userInfo.province}} {{userInfo.city}}
@@ -42,7 +40,7 @@
 		</view>
 
 		<view class="info-bottom">
-			<view class="tip">tel: {{userInfo.mobile}}</view>
+			<view class="tip">{{userInfo.tips}}</view>
 			<view>
 				<view class="care-item" style="margin:0">
 					<view class="care-num">{{myfans.follows}}</view>
@@ -57,7 +55,7 @@
 					<view>获赞</view>
 				</view>
 				 <!-- 是否关注 -->
-				 <view class="contact-box-right float-right" bindtap="Docollection" data-userid="{{loginUser.openid}}" data-followerid="{{userInfo.openid}}">
+				 <view class="contact-box-right float-right" bindtap="Docollection" data-userid="{{loginUser._openid}}" data-followerid="{{userInfo._openid}}">
         <view class="focus" style="background: #e84747;" wx:if='{{!HasCollection}}'>关注</view>
         <view wx:else class="focus" style=" background: rgba(0, 0, 0, 0.4);">已关注</view>
       </view>
@@ -72,6 +70,7 @@
 <view class="grid tabs" >
   <view class="artice {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">文章</view>
   <view class="user {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">关注</view>
+  <view class="user {{currentTab==2 ? 'active' : ''}}" data-current="2" bindtap="swichNav">粉丝</view>
 </view>
 
 
@@ -84,13 +83,27 @@
 			    <!-- 404图片 -->
 					<image style="width:100%" wx:if="{{!centent_Show}}" mode="scaleToFill" src="../image/common/nodata.png"></image>
 			<view id='userlist' class="flex-layout avatarinfo" wx:for="{{followList}}" wx:key="index">
-            <view class="flex-layout" style="width: 100%;" bindtap="gootheruser" data-followerid="{{item.followarr[0].openid}}">
-              <image class="avatarimg" mode="scaleToFill" src="{{item.followarr[0].avatarurl}}"></image>
-							<text class="nickname font-size-12">{{item.followarr[0].nickname}}</text>
-							<image src="{{item.followarr[0].gender == 0 ? '../image/common/male.png' : '../image/common/female.png'}}" style="width:12px;height:12px" alt=""></image>
-							<text class="nickname font-size-12">{{item.followarr[0].city}}</text>
+            <view class="flex-layout" style="width: 100%;" bindtap="gootheruser" data-followerid="{{item.followarr[0]._openid}}">
+              <image class="avatarimg" mode="scaleToFill" src="{{item.followarr[0].avatarUrl}}"></image>
+							<text class="nickName font-size-12">{{item.followarr[0].nickName}}</text>
+							<image src="{{item.followarr[0].gender == 1 ? '../image/common/male.png' : '../image/common/female.png'}}" style="width:12px;height:12px" alt=""></image>
+							<text class="nickName font-size-12">{{item.followarr[0].city}}</text>
 							<text class="likesum font-size-12">{{item.likessumarr.length}}获赞</text>
 									<view class="focuslist" style="color:rgba(0, 0, 0, 0.5);border: 1px solid rgba(0, 0, 0, 0.5);">已关注</view>
+            </view>
+      </view>
+    </swiper-item>
+		<swiper-item>
+			     <!-- 404图片 -->
+					 <image style="width:100%" wx:if="{{!fanslist_Show}}" mode="scaleToFill" src="../image/common/nodata.png"></image>
+			<view id='fanslist' class="flex-layout avatarinfo" wx:for="{{fansList}}" wx:key="index">
+            <view class="flex-layout"  bindtap="gootheruser" data-followerid="{{item.myfanarr[0]._openid}}"  style="width: 100%;">
+              <image class="avatarimg" mode="scaleToFill" src="{{item.myfanarr[0].avatarUrl}}"></image>
+							<text class="nickName font-size-12">{{item.myfanarr[0].nickName}}</text>
+							<image src="{{item.myfanarr[0].gender == 1 ? '../image/common/male.png' : '../image/common/female.png'}}" style="width:12px;height:12px" alt=""></image>
+							<text class="nickName font-size-12">{{item.myfanarr[0].city}}</text>
+							<text class="likesum font-size-12">{{item.likessumarr.length}}获赞</text>
+									<!-- <view class="focuslist" style="color:rgba(0, 0, 0, 0.5);border: 1px solid rgba(0, 0, 0, 0.5);">已关注</view> -->
             </view>
       </view>
     </swiper-item>

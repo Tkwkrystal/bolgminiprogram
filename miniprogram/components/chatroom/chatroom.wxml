@@ -29,7 +29,7 @@
         mode="scaleToFill"
       ></image> 
       <view class="main">
-        <view class="nickname">{{item.nickName}}</view>
+        <view class="nickName">{{item.nickName}}</view>
         <block wx:if="{{item.msgType === 'image'}}">
           <view class="image-wrapper">
             <view class="loading" wx:if="{{item.writeStatus > -1}}">{{item.writeStatus}}%</view>

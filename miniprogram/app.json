@@ -17,7 +17,8 @@
     "pages/im/room/room",
     "pages/search/search",
     "pages/blogDetail/blogDetail",
-    "pages/otherpage/otherpage"
+    "pages/otherpage/otherpage",
+    "pages/login/login"
   ],
   "window": {
     "navigationBarTitleText": "小糖书",
@@ -47,7 +48,15 @@
   },
   "usingComponents":{
     "articlelist":"/components/articlelist/articlelist",
-    "imageswiper":"/components/imageswiper/imageswiper"
+    "imageswiper":"/components/imageswiper/imageswiper",
+    "van-cell-group": "./dist/cell-group/index",
+    "van-divider": "./dist/divider/index",
+    "van-field": "./dist/field/index",
+    "van-notice-bar": "./dist/notice-bar/index",
+    "van-tab": "./dist/tab/index",
+    "van-tabs": "./dist/tabs/index",
+    "van-dropdown-menu": "./dist/dropdown-menu/index",
+    "van-dropdown-item": "./dist/dropdown-item/index"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"

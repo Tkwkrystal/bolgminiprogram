@@ -1,5 +1,5 @@
 /* pages/home/home.wxss */
-
+@import "./home.skeleton.wxss"
 .header-box {
     height: 70px;
     padding-top: 5px;

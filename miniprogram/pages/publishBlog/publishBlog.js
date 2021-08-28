@@ -5,9 +5,9 @@ const {
 
 let imginfo = []
 let detail
-let isEdit = false
-let delimgList =[]
-let temimgList =[]
+let isEdit = false//判断是不是编辑页面
+let delimgList =[]//要删除的图片列表
+let temimgList =[]//临时的图片列表
 
 Page({
 
@@ -145,12 +145,14 @@ Page({
 
     // 选择照片
     ChooseImage() {
+        let that = this
         wx.chooseImage({
             count: 4, //默认9
             sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
             sourceType: ['album'], //从相册选择
-            success: (res) => {
-                // 判断是不是上传第一张照片
+            success: async (res) => {
+                console.log(res)
+                // 判断是不是上传的第一张照片
                 if (this.data.imgList.length != 0) {
                     this.setData({
                         imgList: this.data.imgList.concat(res.tempFilePaths)
@@ -160,18 +162,30 @@ Page({
                         imgList: res.tempFilePaths
                     })
                 }
-                res.tempFilePaths.map(item => {
-                    wx.getImageInfo({
-                        src: item,
-                        success: function (resinfo) {
-                            imginfo = imginfo.concat(resinfo)
-                        }
-                  }) 
-                })
+                for (let i = 0; i < res.tempFilePaths.length; i++) {
+                    let resinfo = await that.getimginfo(res.tempFilePaths[i])
+
+                    imginfo = imginfo.concat(resinfo)
+                }
+           
+
+                // console.log('imgList',this.data.imgList)
+                // console.log('imginfo',imginfo)
             }
         });
     },
-
+// 获取图片信息
+    getimginfo(sor){
+        return new Promise((resolve, errs) => {
+            wx.getImageInfo({
+                src: sor,
+                success (resinfo) {
+                    resolve(resinfo);
+                }
+              })
+            })
+      },
+      
     // 预览照片
     ViewImage(e) {
         wx.previewImage({
@@ -199,6 +213,11 @@ Page({
                     this.setData({
                         imgList: this.data.imgList
                     })
+
+                    console.log('imgList',this.data.imgList)
+                    console.log('imginfo',imginfo)
+                    console.log('delimgList',delimgList)
+
                 }
             }
         })
@@ -417,13 +436,13 @@ ChooseCheckbox(e) {
                 },
                 success: res => {
                     wx.hideLoading()
-                    console.log(res)
                     if(res.result.stats.updated == 1){
                         wx.showToast({
                             title: '更新blog成功',
                             icon: 'success',
                             duration: 2000
                         })
+                        console.log('delimgList',delimgList)
                         if(delimgList.length>0){
                             // 把更新成功，删除 编辑页面删除的已经上传的图片
                             wx.cloud.deleteFile({
@@ -431,9 +450,19 @@ ChooseCheckbox(e) {
                                 success: res => {
                                     // handle success
                                     console.log('delimages', res.fileList)
+
+                                    // 跳转回我的页面
+                                    wx.reLaunch({
+                                        url: '../mypage/mypage'
+                                    })
                                 },
                                 fail: console.error
                             })
+                        }else{
+                               // 跳转回我的页面
+                                    wx.reLaunch({
+                                        url: '../mypage/mypage'
+                                    })
                         }
                     }        
                 },
@@ -457,10 +486,7 @@ ChooseCheckbox(e) {
                 },
                 complete: res => {
                     // console.log(res)
-                      // 跳转回我的页面
-                      wx.reLaunch({
-                        url: '../mypage/mypage'
-                    })
+                   
                 }
             })
         }else{
@@ -469,7 +495,7 @@ ChooseCheckbox(e) {
                 name: 'articles',
                 data: {
                     type: 'add',
-                    openid:userInfo.openid,
+                    openid:userInfo._openid,
                     EntrustType: EntrustType,
                     FormData: FormData,
                     photoInfo: photoInfo,

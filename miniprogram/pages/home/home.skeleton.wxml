@@ -1,0 +1,51 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/8/25 下午7:00:15 
+使用方法：
+在 /Users/tangkewei/Downloads/个人博客小程序/miniprogram/pages/home/home.wxml 引入模板
+
+```
+<import src="home.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 /Users/tangkewei/Downloads/个人博客小程序/miniprogram/pages/home/home.wxss 中引入样式
+```
+@import "./home.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view style="position:fixed;left:0;top:0;width:100%;z-index:9">
+      <view class="page_row">
+        <view class="search">
+          <view class="df search_arr">
+            <icon class="searchicon sk-image" size="18" type="search" color="#EFEFEF"></icon>
+            <view disabled="true" placeholder="Search" value="true" class="sk-image"></view>
+          </view>
+        </view>
+      </view>
+      <scroll-view class="nav" scroll-left="0" scroll-with-animation="true" scroll-x="true">
+        <view class="nav-item active sk-transparent sk-text-34-0000-853 sk-text" data-current="0" data-name="全部" style="background-position-x: 50%;">全部</view>
+        <view class="nav-item sk-transparent sk-text-34-0000-630 sk-text" data-current="1" data-name="vue" style="background-position-x: 50%;">vue</view>
+        <view class="nav-item sk-transparent sk-text-34-0000-236 sk-text" data-current="2" data-name="node" style="background-position-x: 50%;">node</view>
+        <view class="nav-item sk-transparent sk-text-34-0000-639 sk-text" data-current="3" data-name="react" style="background-position-x: 50%;">react</view>
+        <view class="nav-item sk-transparent sk-text-34-0000-840 sk-text" data-current="4" data-name="前端" style="background-position-x: 50%;">前端</view>
+      </scroll-view>
+    </view>
+    <view style="width:100%;height:84px"></view>
+    <view class="cantainer">
+      <scroll-view scroll-y="true" style="height:532px;width:100%">
+        <view is="components/articlelist/articlelist" id="waterFallView">
+          <image mode="scaleToFill" style="width:100%" class="sk-image"></image>
+          <view class="articlelist--fall-container">
+            <view class="articlelist--fall-left"></view>
+            <view class="articlelist--fall-right"></view>
+          </view>
+          <view class="articlelist--ending sk-transparent sk-text-14-2857-229 sk-text" style="background-position-x: 50%;">- The End -</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</template>

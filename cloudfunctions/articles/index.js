@@ -114,12 +114,12 @@ exports.main = async (event, context) => {
                         from: 'likes',
                         let: {
                             art_id: '$_id',
-                            use_id: '$open_id'
+                            use_id: event.loginUserId
                         },
                         pipeline: $.pipeline()
                             .match(_.expr($.and([
                                 $.eq(['$article_id', '$$art_id']),
-                                $.gte(['$user_id', '$$use_id'])
+                                $.eq(['$user_id', '$$use_id'])
                             ])))
                             .project({
                                 like_status: 1,
@@ -143,7 +143,7 @@ exports.main = async (event, context) => {
                     .lookup({
                         from: 'user',
                         localField: 'open_id',
-                        foreignField: 'openid',
+                        foreignField: '_openid',
                         as: 'user',
                     })
                     .replaceRoot({
@@ -165,12 +165,12 @@ exports.main = async (event, context) => {
                         from: 'likes',
                         let: {
                             art_id: '$_id',
-                            use_id: '$open_id'
+                            use_id: event.loginUserId
                         },
                         pipeline: $.pipeline()
                             .match(_.expr($.and([
                                 $.eq(['$article_id', '$$art_id']),
-                                $.gte(['$user_id', '$$use_id'])
+                                $.eq(['$user_id', '$$use_id'])
                             ])))
                             .project({
                                 like_status: 1,
@@ -194,7 +194,7 @@ exports.main = async (event, context) => {
                     .lookup({
                         from: 'user',
                         localField: 'open_id',
-                        foreignField: 'openid',
+                        foreignField: '_openid',
                         as: 'user',
                     })
                     .match({
@@ -226,12 +226,12 @@ exports.main = async (event, context) => {
                         from: 'likes',
                         let: {
                             art_id: '$_id',
-                            use_id: '$open_id'
+                            use_id: event.loginUserId
                         },
                         pipeline: $.pipeline()
                             .match(_.expr($.and([
                                 $.eq(['$article_id', '$$art_id']),
-                                $.gte(['$user_id', '$$use_id'])
+                                $.eq(['$user_id', '$$use_id'])
                             ])))
                             .project({
                                 like_status: 1,
@@ -255,7 +255,7 @@ exports.main = async (event, context) => {
                     .lookup({
                         from: 'user',
                         localField: 'open_id',
-                        foreignField: 'openid',
+                        foreignField: '_openid',
                         as: 'user',
                     })
                     .replaceRoot({
@@ -278,12 +278,12 @@ exports.main = async (event, context) => {
                         from: 'likes',
                         let: {
                             art_id: '$_id',
-                            use_id: '$open_id'
+                            use_id: event.loginUserId
                         },
                         pipeline: $.pipeline()
                             .match(_.expr($.and([
                                 $.eq(['$article_id', '$$art_id']),
-                                $.gte(['$user_id', '$$use_id'])
+                                $.eq(['$user_id', '$$use_id'])
                             ])))
                             .project({
                                 like_status: 1,
@@ -307,7 +307,7 @@ exports.main = async (event, context) => {
                     .lookup({
                         from: 'user',
                         localField: 'open_id',
-                        foreignField: 'openid',
+                        foreignField: '_openid',
                         as: 'user',
                     })
                     .match({
@@ -345,12 +345,12 @@ exports.main = async (event, context) => {
             from: 'likes',
             let: {
                 art_id: '$_id',
-                use_id: '$open_id'
+                use_id: event.userid
             },
             pipeline: $.pipeline()
                 .match(_.expr($.and([
                     $.eq(['$article_id', '$$art_id']),
-                    $.gte(['$user_id', '$$use_id'])
+                    $.eq(['$user_id', '$$use_id'])
                 ])))
                 .project({
                     like_status: 1,
@@ -374,7 +374,7 @@ exports.main = async (event, context) => {
         .lookup({
             from: 'user',
             localField: 'open_id',
-            foreignField: 'openid',
+            foreignField: '_openid',
             as: 'user',
         })
         .replaceRoot({
@@ -418,7 +418,7 @@ exports.main = async (event, context) => {
                     user_id: event.userId,
                     article_id: event.articleId,
                     author_id: event.authorId,
-                    dianzan: '1'
+                    like_status: 1
                 }
             })
         }

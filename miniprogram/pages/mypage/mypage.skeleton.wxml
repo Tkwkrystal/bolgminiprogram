@@ -1,0 +1,78 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/8/25 下午7:00:55 
+使用方法：
+在 /Users/tangkewei/Downloads/个人博客小程序/miniprogram/pages/mypage/mypage.wxml 引入模板
+
+```
+<import src="mypage.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 /Users/tangkewei/Downloads/个人博客小程序/miniprogram/pages/mypage/mypage.wxss 中引入样式
+```
+@import "./mypage.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view class="bg-box sk-image">
+      <view>
+        <view class="head-box">
+          <view class="userAvatar-box" style="border: none;">
+            <open-data type="userAvatarUrl"></open-data>
+          </view>
+          <view class="userlogin">
+            <view class="font-size-18 sk-transparent sk-text-14-2857-504 sk-text">TKW</view>
+            <view class="info">
+              <view class="info-white">
+                <image style="width:12px;height:12px" class="sk-image"></image>
+              </view>
+              <view class="info-white sk-transparent sk-text-14-2857-364 sk-text" style="font-size:12px;color:#ffffff">
+                Jiangsu Wuxi
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="info-bottom">
+          <view class="tip sk-transparent sk-text-14-2857-444 sk-text">tel: 13815133065</view>
+          <view>
+            <view class="care-item" style="margin:0">
+              <view class="care-num sk-transparent sk-text-14-2857-980 sk-text" style="background-position-x: 50%;">0</view>
+              <view class="sk-transparent sk-text-14-2857-144 sk-text" style="background-position-x: 50%;">关注</view>
+            </view>
+            <view class="care-item">
+              <view class="care-num sk-transparent sk-text-14-2857-51 sk-text" style="background-position-x: 50%;">0</view>
+              <view class="sk-transparent sk-text-14-2857-848 sk-text" style="background-position-x: 50%;">粉丝</view>
+            </view>
+            <view class="care-item">
+              <view class="care-num sk-transparent sk-text-14-2857-285 sk-text" style="background-position-x: 50%;">0</view>
+              <view class="sk-transparent sk-text-14-2857-801 sk-text" style="background-position-x: 50%;">获赞</view>
+            </view>
+            <navigator>
+              <view class="float-right loadblog sk-transparent sk-text-14-2857-612 sk-text" style="background-position-x: 50%;">上传</view>
+            </navigator>
+            <view style="clear:both"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="grid tabs">
+      <view class="artice active sk-transparent sk-text-14-2857-272 sk-text sk-pseudo sk-pseudo-circle" data-current="0">文章</view>
+      <view class="user sk-transparent sk-text-14-2857-922 sk-text" data-current="1">关注</view>
+    </view>
+    <swiper class="swiper-box" current="0" duration="300" style="height:300px">
+      <swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(0%, 0px) translateZ(0px);">
+        <view is="components/articlelist/articlelist" id="waterFallView">
+          <image mode="scaleToFill" style="width:100%" class="sk-image"></image>
+          <view class="articlelist--fall-container">
+            <view class="articlelist--fall-left"></view>
+            <view class="articlelist--fall-right"></view>
+          </view>
+          <view class="articlelist--ending sk-transparent sk-text-14-2857-76 sk-text" style="background-position-x: 50%;">- The End -</view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+</template>

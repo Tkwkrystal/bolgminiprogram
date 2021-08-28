@@ -55,14 +55,14 @@ page {
   border: none;
 }
 
-.userinfo-nickname {
+.userinfo-nickName {
   font-size: 32rpx;
   color: #007aff;
   background-color: white;
   background-size: cover;
 }
 
-.userinfo-nickname::after {
+.userinfo-nickName::after {
   border: none;
 }
 
@@ -322,6 +322,7 @@ page {
 .cu-modal.bottom-modal .cu-dialog {
   width: 100%;
   border-radius: 0;
+  padding-bottom: 16px;
 }
 
 .cu-modal.bottom-modal {

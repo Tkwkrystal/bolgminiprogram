@@ -22,12 +22,12 @@
 <image style="width:100%" wx:if="{{!centent_Show}}" mode="scaleToFill" src="../image/common/nodata.png"></image>
 
     <view class="flex-layout avatarinfo"  wx:for="{{followList}}" wx:key="index">
-      <view class="flex-layout" bindtap="gootheruser" data-followerid="{{item.openid}}" style="width: 100%;">
-        <image class="avatarimg" mode="scaleToFill" src="{{item.avatarurl}}"></image>
-        <text class="nickname font-size-12">{{item.nickname}}</text>
-        <image src="{{item.gender == 0 ? '../image/common/male.png' : '../image/common/female.png'}}"
+      <view class="flex-layout" bindtap="gootheruser" data-followerid="{{item._openid}}" style="width: 100%;">
+        <image class="avatarimg" mode="scaleToFill" src="{{item.avatarUrl}}"></image>
+        <text class="nickName font-size-12">{{item.nickName}}</text>
+        <image src="{{item.gender == 1 ? '../image/common/male.png' : '../image/common/female.png'}}"
           style="width:12px;height:12px" alt=""></image>
-        <text class="nickname font-size-12">{{item.city}}</text>
+        <text class="nickName font-size-12">{{item.city}}</text>
 
         <text class="likesum font-size-12">{{item.likessumarr.length}}获赞</text>
         <!-- 是否关注 -->

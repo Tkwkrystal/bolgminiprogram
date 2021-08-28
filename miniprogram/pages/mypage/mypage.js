@@ -7,6 +7,7 @@ Page({
      */
     data: {
         centent_Show:true,
+        fanslist_Show:true,
         UserLogin: false,
         userInfo: null,
         Adminstator: false,
@@ -19,11 +20,12 @@ Page({
           //  默认swiper的高度
           swiperheight:240
     },
-
+    
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        
         var that = this;
         /**
          * 获取当前设备的宽高
@@ -52,19 +54,21 @@ Page({
     onShow: function () {
       
         app.IsLogon()
+        console.log(app.globalData)
         // 全局变量
         let globalData = app.globalData
         let userInfo = globalData.userInfo
-        // userInfo['mobile'] = userInfo['mobile'].replace(userInfo['mobile'].substring(3, 7), "****")
         this.setData({
             UserLogin: globalData.UserLogin,
             userInfo: userInfo
         })
-
-        // 获取文章列表
-        this.getarticles()
-        // 获取 关注/粉丝/获赞 
-        this.getuserfans(userInfo.openid)
+        if(globalData.UserLogin){
+             // 获取文章列表
+            this.getarticles()
+            // 获取 关注/粉丝/获赞 
+            this.getuserfans(userInfo.openid)
+        }
+       
     },
 
  // 获取 关注/粉丝/获赞 
@@ -129,6 +133,8 @@ bindChange: function( e ) {
         this.getarticles()
     }else if(e.detail.current == '1'){
         this.getmyfollow()
+    }else if(e.detail.current == '2'){
+        this.getmyfanlist()
     }
 },
 // 查询自己关注的人
@@ -150,7 +156,6 @@ bindChange: function( e ) {
                 followList: res.result.list,
                 swiperheight: res.result.list.length>0?res.result.list.length * 55 + 20:240
             })  
-            // that.setswiperheight('#userlist')
         },
         fail: err => {
             wx.hideLoading()
@@ -164,6 +169,38 @@ bindChange: function( e ) {
         },
     })
  },
+ // 查询粉丝列表
+ getmyfanlist(){
+    let that = this
+    wx.showLoading()
+
+   wx.cloud.callFunction({
+       name: 'blogs',
+       data: {
+           type: 'getmyfanlist',
+           userid: that.data.userInfo.openid
+       },
+       success: res => {
+           wx.hideLoading()
+           console.log(res)
+           that.setData({
+                fanslist_Show: res.result.list.length == 0?false:true,
+               fansList: res.result.list,
+               swiperheight: res.result.list.length>0?res.result.list.length * 55 + 20:240
+           })  
+       },
+       fail: err => {
+           wx.hideLoading()
+           console.log(err)
+           wx.showToast({
+               title: '查询关注人失败',
+               icon: 'success',
+               duration: 2000
+           })
+
+       },
+   })
+},
 // 给文章列表组件传参数
 fillData: function (isFull,goods){
     let view = this.selectComponent('#waterFallView');
@@ -244,7 +281,7 @@ fillData: function (isFull,goods){
                     // 管理员跳转到管理员页面
                     var url = '../../Adminpackage/managerHome/managerHome'
                     var title = '进入管理员页面'
-                    var id = that.data.userInfo.nickname
+                    var id = that.data.userInfo.nickName
                 } else {
                     // 不是管理员，跳转到扫码页面
                     var url = '../../Adminpackage/scanPage/scanPage'

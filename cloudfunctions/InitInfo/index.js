@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
     if (event.type === 'INIT') {
         const dbname = 'user'
         return await db.collection(dbname).where({
-            'openid': openId
+            '_openid': openId
         }).get()
     }
 

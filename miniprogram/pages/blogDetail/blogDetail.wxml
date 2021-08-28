@@ -15,13 +15,15 @@
 
 <!-- 用户信息 联系方式 -->
 <view class="houseAgent-box font-size-14">
-    <view class="houseAgent-box-portrait float-left" bindtap="gootheruser" data-followerid="{{detail.user[0].openid}}">
+    <view class="houseAgent-box-portrait float-left" bindtap="gootheruser" data-followerid="{{detail.user[0]._openid}}">
      
-        <image  src="{{detail.user[0].avatarurl}}"></image>
+        <image  src="{{detail.user[0].avatarUrl}}"></image>
     </view>
     <view class="Contact-box">
-        <view class="font-size-16" style="display:block;font-weight:500;">{{detail.user[0].nickname}}</view>
-        <view class="text-grey">{{detail.user[0].mobile}}</view>
+        <view class="font-size-16" style="display:block;font-weight:500;">{{detail.user[0].nickName}}
+            <image src="{{detail.user[0].gender == 1 ? '../image/common/male.png' : '../image/common/female.png'}}" style="width:13px;height:13px" alt=""></image>
+        </view>
+        <view class="text-grey">{{detail.user[0].tips}}</view>
     </view>
 
     <!-- 是否关注 -->
@@ -61,7 +63,7 @@
 
 
 <view class="footerBar">
-    <view class="footer-item2" bindtap="clickDianzan" data-user="{{detail.open_id}}" data-article="{{detail._id}}" data-author="{{detail.open_id}}">
+    <view class="footer-item2" bindtap="clickDianzan" data-user="{{user_id}}" data-article="{{detail._id}}" data-author="{{detail.open_id}}">
       
                 <image src="../image/icon/{{detail.like_status=='1'?'collection':'uncollection'}}.png"></image>
           

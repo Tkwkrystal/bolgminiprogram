@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const openId = wxContext.OPENID
   const dbname = 'articles'
-    // 获取关注人列表列表
+    // 获取我的关注列表
     if (event.type === 'getmyfollow') {
      
       const myfollowlist = await db.collection('user_relation')
@@ -30,7 +30,7 @@ exports.main = async (event, context) => {
         },
         pipeline: $.pipeline()
               .match(_.expr($.and([
-                $.eq(['$openid', '$$myfollow'])
+                $.eq(['$_openid', '$$myfollow'])
             ])))
             .done(),
         as: 'followarr',
@@ -52,6 +52,44 @@ exports.main = async (event, context) => {
 
     return myfollowlist
   }
+// 获取粉丝列表
+  if (event.type === 'getmyfanlist') {
+     
+    const myfanslist = await db.collection('user_relation')
+    .aggregate()
+    .match({
+      follower_id: event.userid,
+      relation_type: '1'
+    })
+    .lookup({
+      from: 'user',
+      let: {
+          myfan: '$user_id',
+      },
+      pipeline: $.pipeline()
+            .match(_.expr($.and([
+              $.eq(['$_openid', '$$myfan'])
+          ])))
+          .done(),
+      as: 'myfanarr',
+      })
+      .lookup({
+        from: 'likes',
+        let: {
+            author: '$user_id',
+        },
+        pipeline: $.pipeline()
+              .match(_.expr($.and([
+                $.eq(['$author_id', '$$author']),
+                $.eq(['$like_status', 1])
+            ])))
+            .done(),
+        as: 'likessumarr',
+        })
+      .end()
+
+  return myfanslist
+}
      // 搜索用户列表
      if (event.type === 'searchuser') {
        if(event.searchValue == '' || !event.hasOwnProperty('searchValue')){
@@ -60,7 +98,7 @@ exports.main = async (event, context) => {
         .lookup({
           from: 'user_relation',
           let: {
-              userid: '$openid',
+              userid: '$_openid',
               loginid: event.loginid
           },
           pipeline: $.pipeline()
@@ -92,7 +130,7 @@ exports.main = async (event, context) => {
         const myfollowlist = await db.collection('user')
         .aggregate()
         .match({
-          "nickname": db.RegExp({
+          "nickName": db.RegExp({
             regexp: event.searchValue,
             options: 'i', //大小写不区分
           })
@@ -100,7 +138,7 @@ exports.main = async (event, context) => {
         .lookup({
           from: 'user_relation',
           let: {
-              userid: '$openid',
+              userid: '$_openid',
               loginid: event.loginid
           },
           pipeline: $.pipeline()
@@ -159,8 +197,11 @@ exports.main = async (event, context) => {
    //删除自己的文章 
    if (event.type === 'deletemyblog') {
     const deldata = await db.collection('articles').doc(event.articleid).remove()
-  return deldata
+    const deldatalike = await db.collection('likes').where({article_id:event.articleid}).remove()
+
+    return Object.assign( {} , deldata, deldatalike)
   }
+
 
       // 更新文章
       if (event.type === 'updatablog') {

@@ -16,23 +16,29 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    loginInfo = wx.getStorageSync('userInfo')
-    that.setData({
-      loginInfo: loginInfo
-    });
-    /**
-     * 获取当前设备的宽高
-     */
-    wx.getSystemInfo({
-
-      success: function (res) {
-        that.setData({
-          winWidth: res.windowWidth,
-          winHeight: res.windowHeight
-        });
-      }
-
-    });
+    if(app.globalData.UserLogin){
+      loginInfo = wx.getStorageSync('userInfo')
+      that.setData({
+        loginInfo: loginInfo
+      });
+    }else{
+        // 提示需要授权
+        this.showneedlogin()
+    }
+     /**
+       * 获取当前设备的宽高
+       */
+      wx.getSystemInfo({
+  
+        success: function (res) {
+          that.setData({
+            winWidth: res.windowWidth,
+            winHeight: res.windowHeight
+          });
+        }
+  
+      });
+   
   },
 
   // 跳转他人主页
@@ -54,7 +60,7 @@ Page({
       data: {
         type: 'searchuser',
         searchValue: that.data.searchValue || '',
-        loginid: loginInfo.openid
+        loginid: loginInfo._openid
       },
       success: res => {
         wx.hideLoading()
@@ -98,12 +104,33 @@ Page({
     //   });
     // }
   },
+
+   // 提示需要授权
+   showneedlogin(){
+    wx.showToast({
+      title: '返回首页底部点击-我的-进行注册/登陆',
+      icon: 'none',
+      duration: 2000,
+      mask: true,
+  })
+   },
+  
   // 搜索按钮
   searchclick: function (e) {
     if (this.data.currentTab == 0) {
-      this.getarticles()
+      if(app.globalData.UserLogin){
+        this.getarticles()
+      }else{
+          // 提示需要授权
+         this.showneedlogin()
+      }
     } else if (this.data.currentTab == 1) {
-      this.getmyfollow()
+      if(app.globalData.UserLogin){
+        this.getmyfollow()
+      }else{
+          // 提示需要授权
+          this.showneedlogin()
+      }
     }
 
   },
@@ -113,11 +140,14 @@ Page({
     this.setData({
       result_show: true
     })
+    console.log(loginInfo._openid)
+    console.log(that.data.searchValue)
     wx.cloud.callFunction({
       name: 'articles',
       data: {
         type: 'getarticles',
         searchValue: that.data.searchValue,
+        loginUserId:loginInfo._openid
       },
       success: res => {
         wx.hideLoading()
@@ -171,9 +201,20 @@ Page({
       currentTab: e.detail.current
     });
     if (e.detail.current == '0') {
+      if(app.globalData.UserLogin){
       this.searchclick()
+    }else{
+      // 提示需要授权
+      this.showneedlogin()
+  }
     } else if (e.detail.current == '1') {
-      this.getmyfollow()
+      if(app.globalData.UserLogin){
+        this.getmyfollow()
+      }else{
+          // 提示需要授权
+          this.showneedlogin()
+      }
+     
     }
   },
 

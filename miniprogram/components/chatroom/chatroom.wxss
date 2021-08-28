@@ -69,7 +69,7 @@
   align-items: flex-end;
 }
 
-.body .message .nickname {
+.body .message .nickName {
   font-size: 24rpx;
   color: #444;
 }

@@ -1,5 +1,6 @@
 <!--pages/home/home.wxml-->
-
+<import src="./home.skeleton.wxml"/>
+<template is="skeleton" wx:if="{{loading}}" />
 <view style="position:fixed;left:0;top:0;width:100%;z-index:9">
 	<!-- 搜索 -->
 	<view class='page_row' bindtap="suo">

@@ -28,8 +28,8 @@
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-block-avatar" src="{{avatarUrl}}" mode="cover"></image>
     </block>
-    <view class="userinfo-nickname-wrapper">
-      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+    <view class="userinfo-nickName-wrapper">
+      <button class="userinfo-nickName" bindtap="onGetOpenid">点击获取 openid</button>
     </view>
   </view>
 

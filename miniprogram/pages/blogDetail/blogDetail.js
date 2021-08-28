@@ -27,15 +27,15 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (e) {
-        console.log(e)
+        
         // let id = e.id
         // 查询blog详细信息
         // this.HoseDettail(id)
         detail = JSON.parse(e.detail)
         maxH = 0
-
+        console.log(detail)
         let userInfo = wx.getStorageSync('userInfo')
-        let openid = userInfo.openid
+        let openid = userInfo._openid
         this.setData({
             detail: detail,
             user_id: openid
@@ -98,7 +98,7 @@ Page({
 
 
                         let userInfo = wx.getStorageSync('userInfo')
-                        let openid = userInfo.openid
+                        let openid = userInfo._openid
                         // 检查是否已关注用户
                         that.HasCollection(openid, data.open_id)
                     } else {
@@ -270,6 +270,14 @@ Page({
                 articleid: e.currentTarget.dataset.id
             },
             success: res => {
+                // 删除已上传的图片
+                wx.cloud.deleteFile({
+                    fileList: detail.photoInfo,
+                    success: res => {
+                        console.log('delimages', res.fileList)
+                    },
+                    fail: console.error
+                })
                 wx.hideLoading()
                 wx.navigateBack({
                     delta: 1
@@ -285,6 +293,8 @@ Page({
             }
         })
 
+        
+       
     },
     // 点赞
     clickDianzan(e) {

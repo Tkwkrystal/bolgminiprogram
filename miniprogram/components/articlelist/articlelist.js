@@ -40,83 +40,97 @@ Component({
     // 点赞
     clickDianzan(e){
       // const { articlesList } = this.properties
-      let id = Number(e.currentTarget.dataset.index)
-      let leftorright = e.currentTarget.dataset.leftorright
-        // 前端数组改变数据 - 点赞状态/点赞总数 
-        if(leftorright == 'left'){
-          if(leftList[id].like_status == 1){
-            leftList[id].like_status = 2
-            leftList[id].likesum -= 1
-          }else{
-            leftList[id].like_status = 1
-            leftList[id].likesum += 1
-          }
-        }else{
-          if(rightList[id].like_status == 1){
-            rightList[id].like_status = 2
-            rightList[id].likesum -= 1
-          }else{
-            rightList[id].like_status = 1
-            rightList[id].likesum += 1
-          }
-        }
-      
-      // 点赞数据库like添加记录
-      wx.cloud.callFunction({
-        name: 'articles',
-        data: {
-            type: 'dianzan',
-            articleId: e.currentTarget.dataset.article,
-            authorId: e.currentTarget.dataset.author,
-            userId: e.currentTarget.dataset.user,
-            dianzan: leftorright == 'left'?leftList[id].like_status:rightList[id].like_status,
-            likes:leftorright == 'left'?leftList[id].like:rightList[id].like
-        },
-        success: res => {
-            wx.hideLoading()
-            if(leftorright == 'left'){
-              wx.showToast({
-                title: leftList[id].like_status == 1 ? '点赞成功' : '取消赞成功',
-                icon: 'success',
-                duration: 2000
-            })
-            this.setData({
-              leftList:leftList
-            })
+
+
+      if(app.globalData.UserLogin){
+        let id = Number(e.currentTarget.dataset.index)
+        let leftorright = e.currentTarget.dataset.leftorright
+          // 前端数组改变数据 - 点赞状态/点赞总数 
+          if(leftorright == 'left'){
+            if(leftList[id].like_status == 1){
+              leftList[id].like_status = 2
+              leftList[id].likesum -= 1
             }else{
-              wx.showToast({
-                title: rightList[id].like_status == 1 ? '点赞成功' : '取消赞成功',
-                icon: 'success',
-                duration: 2000
-            })
-            this.setData({
-              rightList:rightList
-            })
+              leftList[id].like_status = 1
+              leftList[id].likesum += 1
             }
-          
-          
-        },
-        fail: err => {
-            wx.hideLoading()
-            console.log(err)
-            wx.showToast({
-                title: '点赞失败',
-                icon: 'success',
-                duration: 2000
-            })
-         
-        },
-      })
+          }else{
+            if(rightList[id].like_status == 1){
+              rightList[id].like_status = 2
+              rightList[id].likesum -= 1
+            }else{
+              rightList[id].like_status = 1
+              rightList[id].likesum += 1
+            }
+          }
+        
+        // 点赞数据库like添加记录
+        wx.cloud.callFunction({
+          name: 'articles',
+          data: {
+              type: 'dianzan',
+              articleId: e.currentTarget.dataset.article,
+              authorId: e.currentTarget.dataset.author,
+              userId: app.globalData.userInfo._openid,
+              dianzan: leftorright == 'left'?leftList[id].like_status:rightList[id].like_status,
+              likes:leftorright == 'left'?leftList[id].like:rightList[id].like
+          },
+          success: res => {
+              wx.hideLoading()
+              if(leftorright == 'left'){
+                wx.showToast({
+                  title: leftList[id].like_status == 1 ? '点赞成功' : '取消赞成功',
+                  icon: 'success',
+                  duration: 2000
+              })
+              this.setData({
+                leftList:leftList
+              })
+              }else{
+                wx.showToast({
+                  title: rightList[id].like_status == 1 ? '点赞成功' : '取消赞成功',
+                  icon: 'success',
+                  duration: 2000
+              })
+              this.setData({
+                rightList:rightList
+              })
+              }
+            
+            
+          },
+          fail: err => {
+              wx.hideLoading()
+              console.log(err)
+              wx.showToast({
+                  title: '点赞失败',
+                  icon: 'success',
+                  duration: 2000
+              })
+           
+          },
+        })
+      }else{
+           // 提示需要授权
+      wx.showToast({
+        title: '返回首页底部点击-我的-进行注册/登陆',
+        icon: 'none',
+        duration: 2000,
+        mask: true,
+    })
+      }
+
+   
       
     },
         // 跳到详情页函数
         NavigateToDetail: function (e) {
           let globalData = app.globalData
-          let url = '../../pages/blogDetail/blogDetail'
-          // let id = e.currentTarget.dataset.id
-          let detail = JSON.stringify(e.currentTarget.dataset.detail)
           let UserLogin = globalData.UserLogin
           if (UserLogin) {
+            let url = '../../pages/blogDetail/blogDetail'
+            e.currentTarget.dataset.detail.loginid = globalData.userInfo._openid
+            let detail = JSON.stringify(e.currentTarget.dataset.detail)
               wx.navigateTo({
                   url: `${url}?detail=${detail}`,
               })
@@ -187,11 +201,22 @@ Component({
 
         // 跳转他人主页
 gootheruser(e){
-  let url = '../otherpage/otherpage'
-  let id = e.currentTarget.dataset.followerid
-      wx.navigateTo({
-          url: `${url}?id=${id}`,
-      })
+  if(app.globalData.UserLogin){
+    let url = '../otherpage/otherpage'
+    let id = e.currentTarget.dataset.followerid
+        wx.navigateTo({
+            url: `${url}?id=${id}`,
+        })
+  }else{
+      // 提示需要授权
+      wx.showToast({
+        title: '返回首页底部点击-我的-进行注册/登陆',
+        icon: 'none',
+        duration: 2000,
+        mask: true,
+    })
+  }
+ 
 },
   },
     

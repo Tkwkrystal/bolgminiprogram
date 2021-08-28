@@ -51,7 +51,7 @@ page {
   border: none;
 }
 
-.userinfo-nickname {
+.userinfo-nickName {
   font-size: 32rpx;
   color: #007aff;
   background-color: white;
@@ -61,11 +61,11 @@ page {
   margin-left: 10px;
 }
 
-.userinfo-nickname::after {
+.userinfo-nickName::after {
   border: none;
 }
 
-.userinfo-nickname-wrapper {
+.userinfo-nickName-wrapper {
   flex: 1;
 }
 
