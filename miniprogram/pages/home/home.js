@@ -297,6 +297,16 @@ Page({
                     // 缓存到本地
                     wx.setStorageSync('userInfo', userInfo)
                     console.log('appdata', app.globalData)
+
+
+                    if (app.globalData.UserLogin) {
+                        // 获取推荐列表的数据
+                        this.getarticles()
+                        // 骨架屏幕消失
+                        this.setData({
+                            loading: false
+                          })
+                      }
                    
                 } else {
                     // 未注册，页面跳转到授权注册页面

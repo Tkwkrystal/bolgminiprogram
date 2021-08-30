@@ -159,6 +159,7 @@ page {
     bottom: 0;
     border-top: 1rpx solid #f0f0f0;
     background-color: #fff;
+    z-index: 99;
 }
 
 .footer-left {

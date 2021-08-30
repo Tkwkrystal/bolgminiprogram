@@ -53,7 +53,11 @@
 					<view>获赞</view>
 				</view>
 				<navigator url="../publishBlog/publishBlog">
-					<view class="float-right loadblog">上传</view>
+				<view style="float: right;padding: 4px;border: 1px solid #f7f7f7;border-radius: 10px;height: 20px;">
+					<image src="../image/common/setting.png"style="width: 20px;height: 20px;" alt=""></image>
+				</view>
+				
+					<!-- <view class="float-right loadblog">上传</view> -->
 				</navigator>
 	
 				<view style="clear:both"></view>

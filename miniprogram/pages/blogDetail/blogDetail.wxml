@@ -54,7 +54,8 @@
 <view class="headerBox">
     <view class="headerBox-row-title font-size-16 title-text-font-weight">{{detail.FormData.title}}</view>
   
-    <view class="headerBox-row font-size-14 text-grey">{{detail.FormData.introduction}}</view>
+  <view></view>
+    <textarea disabled="true" auto-height="true" style="width: 100%;color:rgba(0, 0, 0, 0.7);margin-top: 12rpx;" value="{{detail.FormData.introduction}}"></textarea>
 </view>
 
 
