@@ -6,7 +6,7 @@
 		<text decode="true">&nbsp;&nbsp;<text decode="true" style="color:#EE0A24;">*</text>{{item.title}}</text>
 	</view>
 	<input wx:if="{{item.tag == 'input'}}" placeholder="{{item.placeholder}}" class='radius' id="{{item.id}}" type="{{item.type}}" maxlength='{{item.maxlength}}' style='color: #0080ff;' bindinput="InputData" value="{{isEdit?FormData.title:''}}"></input>
-	<textarea  wx:if="{{item.tag == 'textarea'}}" placeholder="{{item.placeholder}}" class='radius' id="{{item.id}}" type="{{item.type}}" maxlength='{{item.maxlength}}' style='color: #0080ff;height:13em' bindinput="InputData" value="{{isEdit?FormData.introduction:''}}">
+	<textarea  wx:if="{{item.tag == 'textarea'}}" placeholder="{{item.placeholder}}" class='radius' id="{{item.id}}" type="{{item.type}}" maxlength='{{item.maxlength}}' style='color: #0080ff;height:16em' bindinput="InputData" value="{{isEdit?FormData.introduction:''}}">
 		<text class="currentWordNumber">{{currentWordNumber}}/{{item.maxlength}}</text>
 	</textarea>
 </view>

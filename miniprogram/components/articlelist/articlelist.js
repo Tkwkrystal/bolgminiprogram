@@ -129,10 +129,9 @@ Component({
           let UserLogin = globalData.UserLogin
           if (UserLogin) {
             let url = '../../pages/blogDetail/blogDetail'
-            e.currentTarget.dataset.detail.loginid = globalData.userInfo._openid
-            let detail = JSON.stringify(e.currentTarget.dataset.detail)
+            let articleid = e.currentTarget.dataset.id
               wx.navigateTo({
-                  url: `${url}?detail=${detail}`,
+                  url: `${url}?articleid=${articleid}`,
               })
           } else {
               // 提示登录

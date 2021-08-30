@@ -28,7 +28,7 @@
 
     <!-- 是否关注 -->
     <view class="contact-box-right float-right" >
-        <view bindtap="Docollection" data-userid="{{user_id}}" data-followerid="{{detail.open_id}}" data-index="{{index}}">
+        <view bindtap="Docollection" data-userid="{{user_id}}" data-followerid="{{detail.open_id}}" >
         <!-- <image style="width: 50rpx;height: 40rpx;margin-right:5px;vertical-align:middle" mode="scaleToFill" src="{{detail.like_status=='1'?'../../pages/image/common/like.png':'../../pages/image/common/nolike.png'}}"></image> -->
         <view class="focus" style="color:rgba(224, 32, 32, 1);border: 1px solid #E02020;" wx:if='{{!HasCollection}}'>关注</view>
         <view wx:else class="focus" style="color:rgba(0, 0, 0, 0.5);border: 1px solid rgba(0, 0, 0, 0.5);">已关注</view>
@@ -54,8 +54,8 @@
 <view class="headerBox">
     <view class="headerBox-row-title font-size-16 title-text-font-weight">{{detail.FormData.title}}</view>
   
-  <view></view>
-    <textarea disabled="true" auto-height="true" style="width: 100%;color:rgba(0, 0, 0, 0.7);margin-top: 12rpx;" value="{{detail.FormData.introduction}}"></textarea>
+    <textarea disabled="true" auto-height="true" placeholder="暂无" 
+    maxlength="200" style="width: 100%;color:rgba(0, 0, 0, 0.7);margin-top: 12rpx;" value="{{detail.FormData.introduction}}"></textarea>
 </view>
 
 

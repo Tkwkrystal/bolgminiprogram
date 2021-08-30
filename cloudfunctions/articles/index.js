@@ -331,8 +331,65 @@ exports.main = async (event, context) => {
 
 
     }
-    // 查询自己的文章列表
-    if (event.type === 'getmyarticles') {
+    // 查询文章详情
+    if (event.type === 'getarticledetail') {
+        const EntrustList = await db.collection('articles')
+        .aggregate()
+        .sort({
+            updateTime: -1,
+        })
+        .match({
+            _id: event.articleid
+        })
+        .lookup({
+            from: 'likes',
+            let: {
+                art_id: '$_id',
+                use_id: '$open_id',
+            },
+            pipeline: $.pipeline()
+                .match(_.expr($.and([
+                    $.eq(['$article_id', '$$art_id']),
+                    $.eq(['$user_id', '$$use_id'])
+                ])))
+                .project({
+                    like_status: 1,
+                })
+                .done(),
+            as: 'likestatus',
+        })
+        .lookup({
+            from: 'likes',
+            let: {
+                art_id: '$_id',
+            },
+            pipeline: $.pipeline()
+                .match(_.expr($.and([
+                    $.eq(['$article_id', '$$art_id']),
+                    $.eq(['$like_status', 1])
+                ])))
+                .done(),
+            as: 'likesumarr',
+        })
+        .lookup({
+            from: 'user',
+            localField: 'open_id',
+            foreignField: '_openid',
+            as: 'user',
+        })
+        .replaceRoot({
+            newRoot: $.mergeObjects([$.arrayElemAt(['$likestatus', 0]), '$$ROOT'])
+        })
+        .project({
+            likestatus: 0
+        })
+        .end()
+
+    return EntrustList
+    }
+
+      // 查询自己的文章列表
+      if (event.type === 'getmyarticles') {
         const EntrustList = await db.collection('articles')
         .aggregate()
         .sort({

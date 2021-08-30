@@ -18,7 +18,9 @@ Page({
         // 关注/粉丝/获赞
         myfans:{"follows":0,"fans":0,"likes":0},
           //  默认swiper的高度
-          swiperheight:240
+          swiperheight:240,
+            // 点击次数记录
+        TapAccount: 0
     },
     
     /**
@@ -70,6 +72,21 @@ Page({
         }
        
     },
+
+        // 秘密入口
+        ScanPage() {
+            let TapAccount = this.data.TapAccount
+            TapAccount = TapAccount + 1
+            if (TapAccount < 5) {
+                this.setData({
+                    TapAccount: TapAccount
+                })
+            } else {
+                wx.redirectTo({
+                    url: '../publishBlog/publishBlog',
+                })
+            }
+        },
 
  // 获取 关注/粉丝/获赞 
  getuserfans(userid){
@@ -307,20 +324,6 @@ fillData: function (isFull,goods){
         })
     },
 
-    // 秘密入口
-    ScanPage() {
-        let TapAccount = this.data.TapAccount
-        TapAccount = TapAccount + 1
-        console.log(TapAccount)
-        if (TapAccount < 5) {
-            this.setData({
-                TapAccount: TapAccount
-            })
-        } else {
-            // 检查管理员身份
-            this.IsAdminstator()
-        }
-    },
 
     // 跳转函数
     Navigate: function (e) {

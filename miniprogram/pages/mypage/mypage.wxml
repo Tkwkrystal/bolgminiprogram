@@ -21,7 +21,7 @@
 	<view wx:else >
 		<view class="head-box">
 		<!-- <view class="userAvatar-box"> -->
-			<image src="{{userInfo.avatarUrl}}" class="userAvatar-box" alt=""></image>
+			<image src="{{userInfo.avatarUrl}}" class="userAvatar-box" bindtap="ScanPage" alt=""></image>
 		<!-- </view> -->
 		<view class="userlogin">
 			<view class="font-size-18">{{userInfo.nickName}}</view>
@@ -52,13 +52,13 @@
 					<view class="care-num">{{myfans.likes}}</view>
 					<view>获赞</view>
 				</view>
-				<navigator url="../publishBlog/publishBlog">
+				<!-- <navigator url="../publishBlog/publishBlog">
 				<view style="float: right;padding: 4px;border: 1px solid #f7f7f7;border-radius: 10px;height: 20px;">
 					<image src="../image/common/setting.png"style="width: 20px;height: 20px;" alt=""></image>
-				</view>
+				</view> 
 				
-					<!-- <view class="float-right loadblog">上传</view> -->
-				</navigator>
+				<view class="float-right loadblog">上传</view>
+				</navigator> -->
 	
 				<view style="clear:both"></view>
 			</view>

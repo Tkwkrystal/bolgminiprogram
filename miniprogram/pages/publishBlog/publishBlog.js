@@ -5,7 +5,6 @@ const {
 
 let imginfo = []
 let detail
-let isEdit = false//判断是不是编辑页面
 let delimgList =[]//要删除的图片列表
 let temimgList =[]//临时的图片列表
 
@@ -94,7 +93,7 @@ Page({
      */
     onLoad: function (e) {
         if(e.hasOwnProperty('detail')){
-            isEdit = true
+            this.data.isEdit = true
             // 查询blog详细信息
             detail = JSON.parse(e.detail)
             imginfo = detail.FormData.imginfo
@@ -112,7 +111,7 @@ Page({
             checkbox: templeCheckbox,
             templeCheckbox:templeCheckbox,
             templeTags:detail.FormData.Tags,
-            isEdit:isEdit
+            isEdit:this.data.isEdit
         })
         }
       
@@ -423,7 +422,7 @@ ChooseCheckbox(e) {
         let EntrustType = this.data.FormData.Tags.join(',')
         let that = this
 
-        if(isEdit){
+        if(this.data.isEdit){
             wx.cloud.callFunction({
                 name: 'blogs',
                 data: {
@@ -510,9 +509,9 @@ ChooseCheckbox(e) {
                         duration: 2000
                     })
                    // 页面跳转到成功页面
-                    wx.navigateBack({
-                        delta: 1
-                      })
+                    wx.switchTab({
+                      url: '../mypage/mypage',
+                    })
                 },
                 fail: err => {
                     wx.hideLoading()

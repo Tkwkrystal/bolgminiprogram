@@ -37,7 +37,7 @@
       <!--瀑布流内容卡片-->
       <view class="aritcle" style="margin-left:2.5px;margin-top:0" >
         <!-- <imageswiper imgUrls="{{item.photoInfo}}"></imageswiper> -->
-        <image class="coverimg"  mode="widthFix" src="{{item.photoInfo[0]}}" bindtap="NavigateToDetail" data-detail="{{item}}"  data-id="{{item._id}}"></image>
+        <image class="coverimg"  mode="widthFix" src="{{item.photoInfo[0]}}" bindtap="NavigateToDetail"   data-id="{{item._id}}"></image>
         <view class="article-bottom">
           <view class="font-size-12">{{item.FormData.title}}</view>
           <!-- <view>{{item.FormData.introduction}}</view> -->

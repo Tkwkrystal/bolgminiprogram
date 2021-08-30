@@ -251,9 +251,16 @@ Page({
                    that.InitInfo()
                 } else {
                     // 未授权，跳转到授权页面
-                    wx.redirectTo({
-                        url: '../login/login?id=auth'
-                    })
+                    // wx.redirectTo({
+                    //     url: '../login/login?id=auth'
+                    // })
+                    
+                       // 获取推荐列表的数据
+                       this.getarticles()
+                       // 骨架屏幕消失
+                       this.setData({
+                           loading: false
+                         })
                 }
             },
             fail: function (err) {

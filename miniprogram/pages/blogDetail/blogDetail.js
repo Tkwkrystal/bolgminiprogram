@@ -28,21 +28,26 @@ Page({
      */
     onLoad: function (e) {
         
-        // let id = e.id
         // 查询blog详细信息
-        // this.HoseDettail(id)
-        detail = JSON.parse(e.detail)
+        let articleid = e.articleid
+        this.HoseDettail(articleid)
+        
+        
+        
+        // detail = JSON.parse(e.detail)
         maxH = 0
-        console.log(detail)
-        let userInfo = wx.getStorageSync('userInfo')
-        let openid = userInfo._openid
-        this.setData({
-            detail: detail,
-            user_id: openid
-        })
+        // console.log(detail)
+
+
+        // let userInfo = wx.getStorageSync('userInfo')
+        // let openid = userInfo._openid
+        // this.setData({
+        //     detail: detail,
+        //     user_id: openid
+        // })
 
         // 检查是否已关注用户 openid-当前登陆用户 detail.open_id-文章作者用户
-        this.HasCollection(openid, detail.open_id)
+        // this.HasCollection(openid, detail.open_id)
 
     },
     imgHeight: function (e) {
@@ -81,27 +86,36 @@ Page({
     },
     // 查询详情
     HoseDettail(id) {
+        
         wx.showLoading({
             title: '加载中...'
         })
         let that = this
-        db.collection('articles').where({
-            _id: id
-        }).get({
+        wx.cloud.callFunction({
+            name: 'articles',
+            data: {
+                type: 'getarticledetail',
+                articleid: id
+            },
             success(res) {
                 wx.hideLoading()
                 console.log('detail-res', res)
-                if (res.errMsg == "collection.get:ok") {
-                    if (res.data.length > 0) {
-                        let data = res.data[0]
-                        that.SetLisDdata(data)
-
-
+                if (res.errMsg == "cloud.callFunction:ok") {
+                    if (res.result.list.length > 0) {
+                        let data = res.result.list[0]
+                        detail = data
+                        wx.hideLoading()
                         let userInfo = wx.getStorageSync('userInfo')
                         let openid = userInfo._openid
+
+                        that.setData({
+                            detail: detail,
+                            user_id: openid
+                        })
                         // 检查是否已关注用户
                         that.HasCollection(openid, data.open_id)
                     } else {
+                        console.log()
                         wx.showToast({
                             title: '网络错误,请返回重新打开',
                             mask: true,
@@ -135,15 +149,6 @@ Page({
                 })
             }
         })
-    },
-
-    // 赋值
-    SetLisDdata(data) {
-        // let displayPhone = phone.replace(phone.substring(3, 7), "****")
-        this.setData({
-            detail: data,
-        })
-        wx.hideLoading()
     },
 
     // 跳转函数
