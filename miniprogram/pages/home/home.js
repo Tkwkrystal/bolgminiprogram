@@ -81,13 +81,16 @@ Page({
     onLoad: function (options) {
       
         console.log('onload')
-        // 删除本地缓存
-        wx.removeStorageSync('userInfo')
-
-        // 获取个人信息，如果不存在，则跳转到认证页面
-        this.IsAuthor()
+       
 
 
+    // 获取推荐列表的数据
+    this.getarticles()
+    // 骨架屏幕消失
+    this.setData({
+        loading: false
+      })
+      
         // 获取系统信息--宽度
         wx.getSystemInfo({
             success: (res) => {
@@ -232,110 +235,6 @@ Page({
     }
   },
 
-
-
-    /**
-     * 检查授权情况
-     */
-    IsAuthor: function () {
-        wx.showLoading({
-            title: '加载中...',
-            mask: true
-        })
-        
-        var that = this
-        wx.getSetting({
-            success(res) {
-                if (res.authSetting['scope.userInfo']) {
-                   // 获取数据库的用户信息
-                   that.InitInfo()
-                } else {
-                    // 未授权，跳转到授权页面
-                    // wx.redirectTo({
-                    //     url: '../login/login?id=auth'
-                    // })
-                    
-                       // 获取推荐列表的数据
-                       this.getarticles()
-                       // 骨架屏幕消失
-                       this.setData({
-                           loading: false
-                         })
-                }
-            },
-            fail: function (err) {
-                wx.hideLoading()
-            }
-        })
-    },
-
-    // 获取个人信息
-    InitInfo() {
-        wx.showLoading({
-            title: '正在登录...',
-            mask: true
-        })
-        let that = this
-        wx.cloud.callFunction({
-            name: 'InitInfo',
-            data: {
-                type: 'INIT'
-            },
-            success: res => {
-                wx.hideLoading()
-                let result = res.result.data
-                console.log('res', result)
-
-                // 判断是否已经注册
-                if (result.length) {
-                    // 已注册
-                    let userInfo = result[0]
-                    userInfo['openid'] = result[0]._openid
-                    // 修改库变量
-                    app.globalData = {
-                        userInfo: userInfo,
-                        UserLogin: true
-                    }
-                    // 修改登录状态
-                    that.setData({
-                        userInfo: userInfo,
-                        UserLogin: true
-                    })
-                    // 缓存到本地
-                    wx.setStorageSync('userInfo', userInfo)
-                    console.log('appdata', app.globalData)
-
-
-                    if (app.globalData.UserLogin) {
-                        // 获取推荐列表的数据
-                        this.getarticles()
-                        // 骨架屏幕消失
-                        this.setData({
-                            loading: false
-                          })
-                      }
-                   
-                } else {
-                    // 未注册，页面跳转到授权注册页面
-                    wx.redirectTo({
-                        url: '../login/login?id=register'
-                    })
-                }
-            },
-            fail: err => {
-                wx.hideLoading()
-                console.log('err', err)
-                wx.showToast({
-                    title: '网络错误，登录失败...',
-                    icon: 'none',
-                    duration: 2000
-                })
-            },
-            complete: res => {
-                console.log('complete', res)
-            }
-        })
-    },
 
     // 搜索跳转
     suo: function (e) {
