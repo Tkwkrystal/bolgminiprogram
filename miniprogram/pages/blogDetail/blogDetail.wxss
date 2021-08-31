@@ -83,6 +83,7 @@ page {
     margin-top: 8px;
     padding: 8px 0;
     background-color: #fff;
+    position: relative;
 }
 
 .houseAgent-box view {
@@ -114,7 +115,7 @@ page {
     /* padding-left: 12px; */
     /* padding-right: 12px; */
     vertical-align: middle;
-    padding: 3px 12px 3px 12px;
+    padding: 0px 9px;
     vertical-align:middle;
 }
 
@@ -122,7 +123,10 @@ page {
     /* width: 80px; */
     height: 40px;
     /* margin-right: 15px; */
-    padding-top: 20px;
+    /* padding-top: 20px; */
+    position: absolute;
+    right: 0;
+    top: 15px;
     /* background-color: aqua; */
 }
 

@@ -27,9 +27,8 @@
     </view>
 
     <!-- 是否关注 -->
-    <view class="contact-box-right float-right" >
+    <view class="contact-box-right" >
         <view bindtap="Docollection" data-userid="{{user_id}}" data-followerid="{{detail.open_id}}" >
-        <!-- <image style="width: 50rpx;height: 40rpx;margin-right:5px;vertical-align:middle" mode="scaleToFill" src="{{detail.like_status=='1'?'../../pages/image/common/like.png':'../../pages/image/common/nolike.png'}}"></image> -->
         <view class="focus" style="color:rgba(224, 32, 32, 1);border: 1px solid #E02020;" wx:if='{{!HasCollection}}'>关注</view>
         <view wx:else class="focus" style="color:rgba(0, 0, 0, 0.5);border: 1px solid rgba(0, 0, 0, 0.5);">已关注</view>
         </view>
