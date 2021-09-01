@@ -97,11 +97,6 @@
 <img src="https://img-blog.csdnimg.cn/5533ee77e5e04903a81952d774840bd5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAS3J5c3RhbC1Db29s,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" width = "30%" alt="上传" >
 
 
-## 结语
-
-欢迎一起探讨，如果你觉得还可以，您可以给我点一个start，或者赞赏我
-![zanshang](https://img-blog.csdnimg.cn/b7aa87a2659c4c069d6b74ae79a2dac8.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAS3J5c3RhbC1Db29s,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
-
 
 ## 参考文档
 
@@ -109,13 +104,20 @@
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
 
-# 云开发 quickstart
 
-这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：
+# sketch原型设计
+<img src="https://img-blog.csdnimg.cn/a73440e8c1044df983e7b2bfe6ffdc3e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAS3J5c3RhbC1Db29s,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center"></img>
 
-- 数据库：一个既可在小程序前端操作，也能在云函数中读写的 JSON 文档型数据库
-- 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
-- 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
+## 结语
+
+我已将全部资源上传至git，如果你觉得对您有一点点帮助，您可以给我点一个start，或者赞赏我，感谢！
+![zanshang](https://img-blog.csdnimg.cn/b7aa87a2659c4c069d6b74ae79a2dac8.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAS3J5c3RhbC1Db29s,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+
+
+
+
+
+
 
 
 
