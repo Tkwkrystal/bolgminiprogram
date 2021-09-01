@@ -11,7 +11,7 @@
 > 
 > 联系方式🛰️：CoCo-Tang727
 
-![zanshang](https://tkwblog.oss-cn-beijing.aliyuncs.com/mycode)
+<img src="https://img-blog.csdnimg.cn/17ec29de8318457fa84a96dc96eb5ca6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAS3J5c3RhbC1Db29s,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" width="30%" alt="二维码"></img>
 
 - [其他开源项目]
 
@@ -89,12 +89,13 @@
 
 ## 界面预览
 
-<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/home" style="" width = "50%" alt="首页" align=center>
-<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/my" width = "50%" alt="我的" align=center>
-<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/otherpage" width = "50%" alt="他人主页" align=center>
-<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/searchblog" width = "50%" alt="搜索" align=center>
-<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/detail" width = "50%" alt="详情" align=center>
-<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/public" width = "50%" alt="上传" align=center>
+<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/home" style="" width = "30%" alt="首页" align=left>
+<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/my" width = "30%" alt="我的" align=left>
+<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/otherpage" width = "30%" alt="他人主页" align=left>
+<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/searchblog" width = "30%" alt="搜索" align=left>
+<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/detail" width = "30%" alt="详情" align=left>
+<img src="https://tkwblog.oss-cn-beijing.aliyuncs.com/minprogram/public" width = "30%" alt="上传" >
+
 
 ## 结语
 
@@ -102,7 +103,7 @@
 ![zanshang](https://tkwblog.oss-cn-beijing.aliyuncs.com/pay.jpg)
 
 
-# 参考文档
+## 参考文档
 
 - [个人开发详细文档介绍](https://blog.csdn.net/qq_39868515/article/details/120011469)
 
