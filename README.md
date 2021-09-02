@@ -111,9 +111,13 @@
 ## 结语
 
 我已将全部资源上传至git，如果你觉得对您有一点点帮助，您可以给我点一个start，或者赞赏我，感谢！
-![zanshang](https://img-blog.csdnimg.cn/b7aa87a2659c4c069d6b74ae79a2dac8.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAS3J5c3RhbC1Db29s,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
 
+<img src="https://img-blog.csdnimg.cn/b7aa87a2659c4c069d6b74ae79a2dac8.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAS3J5c3RhbC1Db29s,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" width="400" height="400"/>
 
+## 作者
+
+by author CoCo-Tang727 
+2021.09.02
 
 
 
